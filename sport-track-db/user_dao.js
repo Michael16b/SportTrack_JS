@@ -9,9 +9,9 @@ userDAO = function() {
             }
         });
     };
-    this.update = function(key, values, callback) {
-        let query = "update User set lName = ? , fName = ?, birthDate = ?, gender = ?, size = ?, weight = ?, eMail= ?, password = ?  WHERE key = ?";
-        db.run(query, values, callback);
+    this.update = function(key, values) {
+        let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, weight = $weight, eMail= $eMail, password = $password  WHERE eMail = $key";
+        db.run(query, key, values);
 
     };
     this.delete = function(key, callback) {

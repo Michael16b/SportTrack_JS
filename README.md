@@ -76,34 +76,10 @@ Les fichiers seront des fichiers au format JSON. Leur structure sera la suivante
   2. Installez les extensions : [Node JS](https://nodejs.org/),
   [Express](http://expressjs.com/)
   [Module SQLite3 for NodeJS](https://www.npmjs.com/search?q=sqlite3)
-  3. Télécharger [VOTRE version](https://xdebug.org/wizard) de PHP Debug : Suivez les étapes
-  4. Renommez le ficher reçu en : php_xdebug.dll
-  5. Ouvrez votre fichier php.ini disponible sur le dossier source php
-  6. Si vous n'avez pas php.ini mais que vous bénéficier de php.ini-development faites ceci :
-  ```bat
-  copy c:\php\php.ini-development c:\php\php.ini
-  ou (selon votre installation)
-  copy c:\Program Files\php\php.ini-development  c:\Program Files\php\php.ini 
-  ```
-  7. Sinon faites un copier-coller manuellement depuis votre OS
-  8. Désormais ajoutez dans votre php.ini en fin de ligne :
-  ```php
-  [XDebug]
-  xdebug.remote_enable=1
-  xdebug.remote_autostart=1
-  zend_extension="C:\Program Files\php\ext\php_xdebug.dll"
-  ```
-  zend_extension doit être choisi en fonction de votre répertoire php
-
-  9. Redémarrez VSCode, cliquez sur le logo Debug en haut à gauche et dans la petite fenêtre de debug, à droite d'Exécuter et déboguer cliquez sur la liste puis choississez "Listen for xDebug"
-
-  10. Essayez de debug votre programme grâce à F5 et voilà !! Votre PHP peut-être déboggé !!
 
 
-### 1.5. Lancer un fichier PHP(dans le dossier racine du projet)
+### 1.5. Lancer un fichier JavaScript(dans le dossier racine du projet)
 
 ```bat
-php -S localhost:8080
-php test_calcul_distance.php
-curl -X GET "http://localhost:8080/test_calcul_distance.php"
+node ./sport-track-db/sqlite_connection.js
 ```

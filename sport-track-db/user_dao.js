@@ -2,39 +2,31 @@ var db = require('./sqlite_connection');
 
 userDAO = function() {
     this.insert = function(values) {
-        let query = "insert into User(lName,fName,birthDate,gender,size, weight, eMail, password) values (?,?,?,?,?,?,?,?)";
+        let query = "insert into User(lName,fName,birthDate,gender,size, weight, eMail, password) values ($lName,$fName,$birthDate,$gender,$size,$weight,$eMail,$password)";
         db.run(query, values, (err) => {
             if (err) {
                 console.log(err);
             }
         });
     };
-    this.update = function(key, values) {
-        let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, weight = $weight, eMail= $eMail, password = $password  WHERE eMail = $key";
-        db.run(query, key, values);
+
+    this.update = function(values) {
+        let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, eMail = $eMail, weight = $weight, password = $password  WHERE eMail = $lastMail";
+        db.run(query, values);
 
     };
-    this.delete = function(key, callback) {
-        let query = "delete from User where idUser = ?";
-        db.run(query, key, callback);
+    this.delete = function(key) {
+        let query = "delete from User where eMail = ?";
+        db.run(query, key);
     };
     this.findAll = function(callback) {
-        let query = "SELECT * FROM User ORDER BY id";
-        let result = [];
-
-        db.all(query, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                result.push(row);
-            });
-            callback(result);
-        });
+        let query = "SELECT * FROM User";
+        db.all(query, [], callback);
     };
-    this.findByKey = function(key, callback) {
-        let query = "SELECT * FROM User WHERE idUser = ?";
-        db.run(query, [key], callback);
+
+    this.findByKey = function(values, callback) {
+        let query = "SELECT * FROM User WHERE eMail = ?";
+        db.run(query, values, callback);
     };
     this.deleteAll = function() {
         let query = "delete from User";

@@ -1,23 +1,28 @@
 var db = require('./sqlite_connection');
+var User = require('./User');
 
 userDAO = function() {
-    this.insert = function(values) {
+    this.insert = function(user, callback) {
         let query = "insert into User(lName,fName,birthDate,gender,size, weight, eMail, password) values ($lName,$fName,$birthDate,$gender,$size,$weight,$eMail,$password)";
-        db.run(query, values, (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
+        values = [user.getlName(), user.getfName(), user.getBirthDate(), user.getGender(), user.getSize(), user.getWeight(), user.getMail(), user.getPassword()];
+        db.run(query, values, callback);
     };
 
-    this.update = function(values) {
-        let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, eMail = $eMail, weight = $weight, password = $password  WHERE eMail = $lastMail";
-        db.run(query, values);
+    this.selectUser = function(user, callback) {
+        let query = "SELECT * FROM User WHERE eMail = $eMail AND password = $password";
+        values = [user.getMail(), user.getPassword()];
+        db.get(query, values, callback);
+    }
+
+    this.update = function(user, key, callback) {
+        let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, eMail = $eMail, weight = $weight, password = $password  WHERE idUser =" + key;
+        values = [user.getlName(), user.getfName(), user.getBirthDate(), user.getGender(), user.getSize(), user.getMail(), user.getWeight(), user.getPassword()];
+        db.run(query, values, callback);
 
     };
-    this.delete = function(key) {
+    this.delete = function(key, callback) {
         let query = "delete from User where eMail = ?";
-        db.run(query, key);
+        db.run(query, key, callback);
     };
     this.findAll = function(callback) {
         let query = "SELECT * FROM User";
@@ -25,16 +30,12 @@ userDAO = function() {
     };
 
     this.findByKey = function(values, callback) {
-        let query = "SELECT * FROM User WHERE eMail = ?";
-        db.run(query, values, callback);
+        let query = "SELECT * FROM User WHERE idUser = ?";
+        db.get(query, values, callback);
     };
-    this.deleteAll = function() {
+    this.deleteAll = function(callback) {
         let query = "delete from User";
-        db.run(query, (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
+        db.run(query, callback);
     };
 };
 var dao = new userDAO();

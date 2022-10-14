@@ -20,9 +20,9 @@ userDAO = function() {
         db.run(query, values, callback);
 
     };
-    this.delete = function(key, callback) {
-        let query = "delete from User where eMail = ?";
-        db.run(query, key, callback);
+    this.delete = function(values, callback) {
+        let query = "delete from User where idUser = ?";
+        db.run(query, values, callback);
     };
     this.findAll = function(callback) {
         let query = "SELECT * FROM User";

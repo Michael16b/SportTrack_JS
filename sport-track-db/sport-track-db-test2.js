@@ -50,6 +50,19 @@ user_dao.selectUser(user, (err, row) => {
             console.log(err);
         }
         console.log("User updated");
-
+        console.log("Test : findAll ")
+        user_dao.findAll((err, rows) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(rows);
+            user_dao.delete(idUser, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log("User deleted");
+            })
+        })
     })
+
 });

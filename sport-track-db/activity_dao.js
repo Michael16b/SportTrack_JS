@@ -10,6 +10,12 @@ activityDAO = function() {
         });
     };
 
+    this.selectAcitvity = function(user, callback) {
+        let query = "SELECT * FROM Activity WHERE eMail = $eMail AND password = $password";
+        values = [user.getMail(), user.getPassword()];
+        db.get(query, values, callback);
+    }
+
     this.update = function(values) {
         let query = "update Activities set description = $desc , date = $date,startTime = $st,duration = $du ,distance = $dis,cardiacFreqMin = $cFreqMin, cardiacFreqAvg = $cFreqAvg, cardiacFreqMax = $cFreqMax, idUser = $idUser WHERE idAct = $id";
         db.run(query, values);

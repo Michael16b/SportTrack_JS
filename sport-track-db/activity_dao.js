@@ -16,7 +16,7 @@ activityDAO = function() {
     this.update = function(activity, key, callback) {
         let query = "update Activities set description = $desc , date = $date,startTime = $st,duration = $du ,distance = $dis,cardiacFreqMin = $cFreqMin, cardiacFreqAvg = $cFreqAvg, cardiacFreqMax = $cFreqMax, idUser = $idUser WHERE idAct =" + key;
         values = [activity.getDesc(), activity.getDate(), activity.getStartTime(), activity.getDuration(), activity.getDistance(), activity.getCardiacFreqMin(), activity.getCardiacFreqAvg(), activity.getCardiacFreqMax(), activity.getIdUser()];
-        db.run(query, values);
+        db.run(query, values, callback);
 
     };
     this.delete = function(values, callback) {

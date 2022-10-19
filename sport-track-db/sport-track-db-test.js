@@ -2,6 +2,8 @@ var User = require('./User');
 var user_dao = require('./sport-track-db').user_dao;
 var Activity = require('./Activity');
 var activity_DAO = require('./sport-track-db').activityDAO;
+var Data = require('./Data');
+var activityEntryDAO = require('./sport-track-db').activityEntryDAO;
 var db = require('./sport-track-db').db_connection;
 
 
@@ -9,12 +11,12 @@ var db = require('./sport-track-db').db_connection;
 var user = new User();
 var user2 = new User();
 var activity = new Activity();
+var data = new Data();
 
 user_dao.deleteAll(function(err) {
     if (err) {
         console.log(err);
     }
-
     testInsertUser();
 });
 
@@ -81,7 +83,7 @@ function testDeleteUser(idUser) {
 }
 
 
-
+// Test : ActivityDAO
 function testDeleteAllActivities() {
     console.log("TEST : ActivityDAO");
     activity_DAO.deleteAll((err) => {
@@ -184,5 +186,124 @@ function testDeleteActivity(idAct) {
             console.log(err);
         }
         console.log("Activity deleted");
+        testDeleteAllData();
     })
+}
+
+// Test : ActivityEntryDAO
+
+function testDeleteAllData() {
+    console.log("TEST : ActivityEntryDAO");
+    activityEntryDAO.deleteAll((err) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log("All data deleted");
+        testInsertData();
+    })
+}
+
+function testInsertData() {
+    console.log("Test : insert Data")
+    selectUser(user, (err, id) => {
+        if (err) {
+            console.log(err);
+        }
+        var idUser = id
+        activity.init("Pétanque", "18/08/2022", "16:00:00", "00:10:00", 10, 75, 110, 150, idUser);
+        activity_DAO.insert(activity, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            selectActivity(activity, (err, idAct) => {
+                if (err) {
+                    console.log(err);
+                }
+                var idAct = idAct
+                data.init("20:00:00", -2.776605, 47.646870, 15, idAct);
+                activityEntryDAO.insert(data, (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log("Data inserted");
+                    selectData(data, (err, idData) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        var idData = idData
+                        console.log("Data inserted with id : " + idData);
+                        testFindByKeyData(idData);
+                    })
+                })
+            })
+        })
+
+    })
+}
+
+
+function selectData(data, callback) {
+    activityEntryDAO.selectData(data, (err, row) => {
+        if (err) {
+            console.log(err);
+        }
+        var data = row
+        callback(err, data.idData);
+    });
+}
+
+function testFindByKeyData(idData) {
+    console.log("Test : findByKey Data")
+    activityEntryDAO.findByKey(idData, (err, row) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(row);
+        testUpdateData(idData);
+    })
+}
+
+function testUpdateData(idData) {
+    console.log("Test : update Data")
+    selectActivity(activity, (err, idAct) => {
+        if (err) {
+            console.log(err);
+        }
+        var idAct = idAct
+        data.init("23:00:00", -2.650058, 14.646870, 30, idAct);
+        activityEntryDAO.update(data, idData, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log("Data updated");
+
+        })
+    })
+    testDeleteData(idData);
+}
+
+
+
+function testDeleteData(idData) {
+    console.log("Test : delete Data")
+    activityEntryDAO.delete(idData, (err) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log("Data deleted");
+        deleteAll();
+    })
+}
+
+// Suppression de toutes les données de la base de données
+function deleteAll() {
+    console.log("Delete All");
+    testDeleteAllActivities();
+    user_dao.deleteAll(function(err) {
+        if (err) {
+            console.log(err);
+        }
+        testDeleteAllData();
+    });
+
 }

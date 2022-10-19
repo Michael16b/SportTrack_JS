@@ -1,0 +1,37 @@
+form(action='/user_add' method='post')
+  fieldset
+    legend Information inscription
+    div
+      label(for='surname') Nom : 
+      input#surname(type='text' name='surname' maxlengh='40' required='')
+    div
+      label(for='name') Prénom : 
+      input#name(type='text' name='name' maxlengh='40' required='')
+  fieldset
+    legend Information personnelle
+    div
+      label(for='dateNaissance') Date de Naissance : 
+      input#date(type='date' name='date' min='1900-01-01' max='2022-12-31' required='')
+    div
+      label(for='gender') Genre : 
+      input#gender(type='radio' name='gender' value='M' checked='')
+      label Homme
+      input#gender(type='radio' name='gender' value='F')
+      label Femme
+      input#gender(type='radio' name='gender' value='NB')
+      label Non-binaire
+    div
+      label(for='size') Taille(en cm) :
+      input#size(type='number' name='size' min='1' max='300' required='')
+    div
+      label(for='weight') Poids(en kg) :
+      input#weight(type='number' name='weight' min='1' max='750' required='')
+  fieldset
+    legend Création de compte
+    div
+      label(for='mail') Adresse e-mail :
+      input#email(type='email' name='mail' pattern='[^ @]*@[^ @]*' placeholder='michael@example.com' required='')
+    div
+      label(for='password') Mot de passe :
+      input#password(type='password' name='password' pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Doit contenir au moins un nombre, une majuscule et une minuscule, et 8 caractères ou plus' required='')
+  input(type='submit' value='Envoyez')

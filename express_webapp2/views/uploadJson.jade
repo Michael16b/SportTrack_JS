@@ -1,0 +1,12 @@
+html
+  head
+    title Upload a json file
+  body
+    h1 Uploadez votre fichier json
+    form(action='/upload' method='post' enctype='multipart/form-data')
+      label(for='myfile') Selectionner un fichier .JSON :
+      input#myfile(type='file' name='myfile' accept='.json')
+      br
+      br
+      input(type='submit')
+    button(name='button' onclick="location.href='/'") Retour

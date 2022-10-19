@@ -13,6 +13,11 @@ userDAO = function() {
         values = [user.getMail(), user.getPassword()];
         db.get(query, values, callback);
     }
+    this.connect = function(mail, password, callback) {
+        let query = "SELECT * FROM User WHERE eMail = $eMail AND password = $password";
+        values = [mail, password];
+        db.get(query, values, callback);
+    }
 
     this.update = function(user, key, callback) {
         let query = "update User set lName = $lName , fName = $fName, birthDate = $birthDate, gender = $gender, size = $size, eMail = $eMail, weight = $weight, password = $password  WHERE idUser =" + key;
@@ -20,11 +25,11 @@ userDAO = function() {
         db.run(query, values, callback);
     };
 
-    this.findByEmail = function(email) {
+    this.findByEmail = function(mail, callback) {
         let query = "SELECT * FROM User WHERE eMail = $eMail";
-        values = [email];
-        return db.get(query, values);
-    };
+        values = [mail];
+        db.get(query, values, callback);
+    }
 
     this.delete = function(values, callback) {
         let query = "delete from User where idUser = ?";

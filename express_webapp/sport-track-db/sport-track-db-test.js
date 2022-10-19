@@ -48,6 +48,8 @@ function testSelectUser() {
 }
 
 
+
+
 function testfindByKey(idUser) {
     console.log("Test : findByKey ")
     user_dao.findByKey(idUser, (err, row) => {
@@ -55,9 +57,23 @@ function testfindByKey(idUser) {
             console.log(err);
         }
         console.log(row);
+        testFindByMail(idUser);
+
+    })
+}
+
+
+function testFindByMail(idUser) {
+    console.log("Test : findByMail ")
+    user_dao.findByEmail("john.eMail@gmail.com", (err, row) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(row);
         testUpdateUser(idUser);
     })
 }
+
 
 function testUpdateUser(idUser) {
     console.log("Test : update ")

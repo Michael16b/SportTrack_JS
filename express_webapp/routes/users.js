@@ -11,10 +11,12 @@ router.get("/", function(req, res, next) {
 router.post("/", function(req, res, next) {
     try {
         var email = req.body.mail;
-        console.log(email);
-        user_dao.findByEmail(email).then((rows) => {
-            if (rows && Object.values(rows)) {
-                res.render('error', { message: "L'email existe déjà", error: { status: 500, stack: "L'email existe déjà" } });
+        var password = req.body.password;
+        user_dao.findByEmail(email, (err, row) => {
+            if (err) {
+                console.log(err);
+            } else if (row != null) {
+                res.render("users", { title: "S'inscrire", message: "Email déjà utilisé" });
             } else {
                 var user = new User();
                 user.init(req.body.surname, req.body.name, req.body.birth, req.body.gender,

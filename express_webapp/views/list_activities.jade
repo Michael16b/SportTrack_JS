@@ -1,0 +1,35 @@
+div
+    table 
+        caption Vos activités
+            tr
+                th Description
+                th Date
+                th Heure de départ
+                th Durée
+                th Distance
+                th Fréquence cardiaque minimum
+                th Fréquence cardiaque moyenne
+                th Fréquence cardiaque maximum
+
+            for data in acts
+                tr 
+                    td
+                        p= data[0]
+                    td
+                        p= data[1]
+                    td
+                        p= data[2]
+                    td
+                        p= data[3]
+                    td 
+                        p= data[4]
+                    td 
+                        p= data[5]
+                    td 
+                        p= data[6]
+                    td 
+                        p= data[7]
+            else 
+                tr
+                    td  
+                        p Vous n'avez aucune activité

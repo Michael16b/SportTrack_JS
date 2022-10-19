@@ -1,9 +1,0 @@
-form(action='/connect' method='post')
-  div
-    label(for='mail') Adresse e-mail :
-    input#email(type='email' name='mail' pattern='[^ @]*@[^ @]*' placeholder='michael@example.com' required='')
-  div
-    label(for='password') Mot de passe :
-    input#password(type='password' name='password' minlength='8' pattern='(?=.*?[#?!@$%^&*-\]\[])+' required='')
-  input(type='submit' value='Valider')
-  br

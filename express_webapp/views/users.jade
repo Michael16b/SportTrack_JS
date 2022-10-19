@@ -1,39 +1,43 @@
 html
     head
-        form(action='/users' method='post')
-        fieldset
-            legend Information inscription
-            div
-            label(for='surname') Nom : 
-            input#surname(type='text' name='surname' maxlengh='40' required='')
-            div
-            label(for='name') Prénom : 
-            input#name(type='text' name='name' maxlengh='40' required='')
-        fieldset
+        title= title
+    body
+        form(action="/users", method="post")
+            legend Information inscription 
+            label Nom : 
+            input(type='text', name="surname",  id="surname",maxlengh='40', required)
+            br
+            label Prénom : 
+            input(type='text', name="name", id="surname",maxlengh='40', required)
+            br
             legend Information personnelle
-            div
-            label(for='dateNaissance') Date de Naissance : 
-            input#date(type='date' name='date' min='1900-01-01' max='2022-12-31' required='')
-            div
-            label(for='gender') Genre : 
-            input#gender(type='radio' name='gender' value='M' checked='')
+            label Date De Naissance : 
+            input(type='date', name="birth", id="birth", required)
+            br
+            label Genre :
+            input(type='radio', name="gender", id="M", value="M", required)
             label Homme
-            input#gender(type='radio' name='gender' value='F')
+            input(type='radio', name="gender", id="F", value="F", required)
             label Femme
-            input#gender(type='radio' name='gender' value='NB')
+            input(type='radio', name="gender", id="NB", value="NB", required)
             label Non-binaire
-            div
-            label(for='size') Taille(en cm) :
-            input#size(type='number' name='size' min='1' max='300' required='')
-            div
-            label(for='weight') Poids(en kg) :
-            input#weight(type='number' name='weight' min='1' max='750' required='')
-        fieldset
-            legend Création de compte
-            div
-            label(for='mail') Adresse e-mail :
-            input#email(type='email' name='mail' pattern='[^ @]*@[^ @]*' placeholder='michael@example.com' required='')
-            div
-            label(for='password') Mot de passe :
-            input#password(type='password' name='password' title='Doit contenir au moins un nombre, une majuscule et une minuscule, et 8 caractères ou plus' required='')
-        input(type='submit' value='Envoyez')
+            br
+            label Taille(en cm) : 
+            input(type='number', name="size", id="size", min='1',max='300', required)
+            br
+            label Poids(en kg) : 
+            input(type='number', name="weight", id="weight",min='1', max='750', required)
+            br
+            br
+            legend Création de compte 
+            label Adresse électronique :  
+            input(type='email', name="mail", id="mail",placeholder='michael@example.com', required)
+            br
+            label Mot de passe : 
+            input(type="password", id="password", name="password", minlength="8", required)
+            br
+            br
+            legend Validation
+            input(type="submit", value="Créer mon compte")
+
+

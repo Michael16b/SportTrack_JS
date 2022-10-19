@@ -1,0 +1,12 @@
+html
+    head
+        title= title
+    body
+        form(action="/upload", method="post", enctype="multipart/form-data") 
+            label Sélectionnez un fichier (JSON uniquement) : 
+            br
+            br
+            input(type='file', name="activites",  id="activites", accept="application/JSON", required)
+            br
+            br
+            input(type="submit", value="Importer")

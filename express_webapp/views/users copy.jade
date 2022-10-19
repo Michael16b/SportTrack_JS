@@ -1,0 +1,100 @@
+html
+    head
+        title= title
+    body
+        form(action="/users", method="post")
+        fieldset
+            legend Information inscription 
+            label Nom : 
+            input(type='text', name="surname",  id="surname",maxlengh='40', required)
+            br
+            label Prénom : 
+            input(type='text', name="name", id="surname",maxlengh='40', required)
+            br
+        fieldset
+            legend Information personnelle
+            label Date De Naissance : 
+            input(type='date', name="birth", id="birth", required)
+            br
+            label Genre :
+            input(type='radio', name="gender", id="M", value="M", required)
+            label Homme
+            input(type='radio', name="gender", id="F", value="F", required)
+            label Femme
+            input(type='radio', name="gender", id="NB", value="NB", required)
+            label Non-binaire
+            br
+            label Taille(en cm) : 
+            input(type='number', name="size", id="size", min='1',max='300', required)
+            br
+            label Poids(en kg) : 
+            input(type='number', name="weight", id="weight",min='1', max='750', required)
+            br
+            br
+        fieldset
+            legend Création de compte 
+            label Adresse électronique :  
+            input(type='email', name="mail", id="mail",placeholder='michael@example.com', required)
+            br
+            label Mot de passe : 
+            input(type="password", id="password", name="password", minlength="8", required)
+            br
+            br
+        fieldset 
+            legend Validation
+            input(type="submit", value="Créer mon compte")
+
+
+
+
+
+        html
+    head
+        title= title
+    body
+        form(action="/users", method="post")        
+            label Nom : 
+            br
+            input(type='text', name="nom",  id="nom", required)
+            br
+            br
+            label Prénom : 
+            br
+            input(type='text', name="prenom", id="prenom", required)
+            br
+            br
+            label Date de naissance :
+            br
+            input(type='date', name="datenaiss", id="datenaiss", required)
+            br
+            br
+            p Genre :
+            input(type='radio', name="sexe", id="M", value="M", required)
+            label Masculin
+            input(type='radio', name="sexe", id="F", value="F", required)
+            label Féminin
+            input(type='radio', name="sexe", id="NB", value="NB", required)
+            label Non binaire
+            br
+            br
+            label Taille 
+            br
+            input(type='number', name="taille", id="taille", required)
+            br
+            br
+            label Poids :
+            br
+            input(type='number', name="poids", id="poids", required)
+            br
+            br
+            label Adresse électronique : 
+            br
+            input(type='email', name="mail", id="mail", pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}", required)
+            br
+            br
+            label Mot de passe :
+            br
+            input(type="password", id="mdp", name="mdp", minlength="8", required)
+            br
+            br
+            input(type="submit", value="Créer mon compte")

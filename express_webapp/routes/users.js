@@ -1,17 +1,31 @@
-var express = require('express');
+var express = require("express");
+const User = require('../sport-track-db/User');
 var router = express.Router();
-var user_dao = require('sport-track-db').user_dao;
-var User = require('sport-track-db').user;
+var user_dao = require('../sport-track-db/user_dao');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.render('users', { title: 'Users' });
+//afficher tous les users de la bdd
+router.get("/", function(req, res, next) {
+    res.render("users", { title: "S'inscrire" });
 });
 
-/* Add a new user */
-router.post('/', function(req, res, next) {
-    console.log(req.body);
-
+router.post("/", function(req, res, next) {
+    try {
+        var email = req.body.mail;
+        console.log(email);
+        user_dao.findByEmail(email).then((rows) => {
+            if (rows && Object.values(rows)) {
+                res.render('error', { message: "L'email existe déjà", error: { status: 500, stack: "L'email existe déjà" } });
+            } else {
+                var user = new User();
+                user.init(req.body.surname, req.body.name, req.body.birth, req.body.gender,
+                    parseInt(req.body.size), parseInt(req.body.weight), email, password);
+                user_dao.insert(user);
+                res.render('user_add_valid');
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 

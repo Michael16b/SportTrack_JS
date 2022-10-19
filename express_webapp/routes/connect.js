@@ -15,7 +15,7 @@ router.post("/", function(req, res, next) {
                 console.log(err);
             } else if (row != null) {
                 req.session.idUser = row.idUser;
-                res.render("index", { title: "Sport Track", message: "Bienvenue" });
+                res.redirect("/");
             } else {
                 res.render("connect", { title: "Connexion", message: "Email ou mot de passe incorrect" });
             }

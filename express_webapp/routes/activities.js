@@ -7,13 +7,13 @@ router.get("/", (req, res) => {
     try {
         //vérifier si le user est connecté
         if (req.session.idUser != null) {
-            var acts = new Array();
-            activity_dao.findAll().then((rows) => {
-                //pour chaque activité
+            activity_dao.findAll((err, rows) => {
+                if (err) {
+                    console.log(err);
+                }
+                var acts = new Array();
                 rows.forEach((row) => {
-                    //si l'activité appartient à l'utilisateur connecté
                     if (row.idUser == req.session.idUser) {
-                        //ajouter l'activité à la liste des activités
                         var data = [
                             row.description,
                             row.date,
@@ -30,10 +30,8 @@ router.get("/", (req, res) => {
                 console.log(acts)
                 res.render('list_activities', { title: 'Liste des activités', acts: acts });
             });
-        } else {
-            //si aucun user connecté, renvoyer vers la page de connexion
-            res.redirect('/connect');
         }
+
 
     } catch (error) {
         res.render("error", {

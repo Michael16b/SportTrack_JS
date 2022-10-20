@@ -71,7 +71,7 @@ Les fichiers seront des fichiers au format JSON. Leur structure sera la suivante
 }
 ```
 
-### 1.4. Installation PHP Debug (XDebug)
+### 1.4. Installation JavaScript + Express + NodeJS
   1. Installez [VSCode](https://code.visualstudio.com/)
   2. Installez les extensions : [Node JS](https://nodejs.org/),
   [Express](http://expressjs.com/)

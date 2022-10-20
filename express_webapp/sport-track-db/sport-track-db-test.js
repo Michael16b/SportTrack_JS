@@ -315,31 +315,29 @@ function testUpdateData(idData) {
 
         })
     })
-    testDeleteData(idData);
+    deleteAll();
 }
 
 
-
-function testDeleteData(idData) {
-    console.log("Test : delete Data")
-    activityEntryDAO.delete(idData, (err) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log("Data deleted");
-        deleteAll();
-    })
-}
 
 // Suppression de toutes les données de la base de données
 function deleteAll() {
     console.log("Delete All");
-    testDeleteAllActivities();
     user_dao.deleteAll(function(err) {
         if (err) {
             console.log(err);
         }
-        testDeleteAllData();
+        activity_DAO.deleteAll(function(err) {
+            if (err) {
+                console.log(err);
+            }
+            activityEntryDAO.deleteAll(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                console.log("All data deleted into the database");
+            })
+        })
     });
 
 }

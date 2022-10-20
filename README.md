@@ -78,8 +78,16 @@ Les fichiers seront des fichiers au format JSON. Leur structure sera la suivante
   [Module SQLite3 for NodeJS](https://www.npmjs.com/search?q=sqlite3)
 
 
-### 1.5. Lancer un fichier JavaScript(dans le dossier racine du projet)
+### 1.5. Lancer le fichier de test (dans le dossier racine du projet)
 
-```bat
-node ./sport-track-db/sqlite_connection.js
-```
+   1. Placez-vous dans express_webapp
+   2. Copiez la ligne de commande ci-dessous :
+      ```bat
+      node .\sport-track-db\sport-track-db-test.js
+      ```
+   3. Pour lancer le site web sur votre machine, copiez la ligne de commande ci-dessous :
+      ```bat
+      npm start
+      ```
+   4. Il se pourrait que vous ayez des erreurs, notamment au niveau des modules,
+      N'hésitez pas à les installer. 

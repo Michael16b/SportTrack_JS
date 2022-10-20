@@ -13,6 +13,7 @@ var connectRouter = require("./routes/connect");
 var uploadRouter = require("./routes/upload");
 var activitiesRouter = require("./routes/activities");
 var updateRouter = require("./routes/user_update");
+var deleteRouter = require("./routes/user_delete");
 var app = express();
 
 // view engine setup
@@ -43,6 +44,7 @@ app.use("/connect", connectRouter);
 app.use("/upload", uploadRouter);
 app.use("/list_activities", activitiesRouter);
 app.use("/user_update", updateRouter);
+app.use("/user_delete", deleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

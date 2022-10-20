@@ -47,7 +47,4 @@ module.exports =
             }
             return distTotale * 1000;
         }
-
-
-
     }

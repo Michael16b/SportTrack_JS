@@ -22,10 +22,10 @@ trajet = {
         { "time": "13:00:25", "cardio_frequency": 103, "latitude": 47.648510, "longitude": -2.780145, "altitude": 16 }
     ]
 }
+console.log("Test : CalculDistance with class")
 var calculDistance = new CalculDistance();
-
 console.log(calculDistance.calculDistanceTrajet(trajet));
-
+console.log("Test : CalculDistance with class : OK")
 
 
 var user = new User();
@@ -322,7 +322,6 @@ function testUpdateData(idData) {
 
 // Suppression de toutes les données de la base de données
 function deleteAll() {
-    console.log("Delete All");
     user_dao.deleteAll(function(err) {
         if (err) {
             console.log(err);

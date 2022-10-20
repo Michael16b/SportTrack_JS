@@ -37,7 +37,7 @@ router.post("/", (req, res, next) => {
 
 
         var startTime = dataArray[0]
-        var duration = new Date(Date.parse("Janvier 01, 1999 " + dataArray[dataArray.length - 5])) - new Date(Date.parse("Janvier 01, 1999 " + startTime));
+        var duration = ConverterDuration(new Date(Date.parse("Janvier 01, 1999 " + dataArray[dataArray.length - 5])) - new Date(Date.parse("Janvier 01, 1999 " + startTime)));
 
         var classCalc = new CalculDistance();
         data = new Array();
@@ -68,7 +68,7 @@ router.post("/", (req, res, next) => {
             res.redirect("connect");
         } else {
             var activity = new Activity();
-            activity.init(desc, date, startTime, duration, distance, minCardio, avgCardio, maxCardio, req.session.idUser);
+            activity.init(desc, date, duration, startTime, distance, minCardio, avgCardio, maxCardio, req.session.idUser);
 
             activity_dao.insert(activity, (err) => {
                 if (err) {
@@ -99,5 +99,22 @@ router.post("/", (req, res, next) => {
         });
     }
 });
+
+
+function ConverterDuration(ms) {
+    let seconds = ms / 1000;
+    var hours = parseInt(seconds / 3600);
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    seconds = seconds % 3600;
+    var minutes = parseInt(seconds / 60);
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    seconds = seconds % 60;
+    return hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+}
+
 
 module.exports = router;

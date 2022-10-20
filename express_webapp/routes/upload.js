@@ -42,10 +42,11 @@ router.post("/", (req, res, next) => {
         var classCalc = new CalculDistance();
         data = new Array();
         for (let i = 2; i < dataArray.length; i += 5) {
-            data.push({ 'latitude': dataArray[i], 'longitude': dataArray[i + 1] });
+            data.push({ 'latitude': dataArray[i + 1], 'longitude': dataArray[i] });
         }
 
         var distance = classCalc.calculDistanceTrajet({ 'data': data });
+        console.log(distance);
 
 
 
@@ -68,7 +69,7 @@ router.post("/", (req, res, next) => {
             res.redirect("connect");
         } else {
             var activity = new Activity();
-            activity.init(desc, date, duration, startTime, distance, minCardio, avgCardio, maxCardio, req.session.idUser);
+            activity.init(desc, date, duration, startTime, distance.toFixed(2), minCardio, avgCardio.toFixed(2), maxCardio, req.session.idUser);
 
             activity_dao.insert(activity, (err) => {
                 if (err) {

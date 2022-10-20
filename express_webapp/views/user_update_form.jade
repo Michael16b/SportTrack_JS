@@ -1,0 +1,43 @@
+html
+    head
+        title= title
+    body
+        form(action="/user_update", method="post")
+            legend Information inscription 
+            label Nom : 
+            input(type='text', name="surname",  id="surname",maxlengh='40', value=info[0], required)
+            br
+            label Prénom : 
+            input(type='text', name="name", id="surname",maxlengh='40', value=info[1],required)
+            br
+            br
+            legend Information personnelle
+            label Date de Naissance : 
+            input(type='date', name="birth", id="birth", value=info[2],required)
+            br
+            label Genre :
+            input(type='radio', name="gender", id="M", value="M", checked=(info[3] == "M"),  required)
+            label Homme
+            input(type='radio', name="gender", id="F", value="F", checked=(info[3] == "F"), required)
+            label Femme
+            input(type='radio', name="gender", id="NB", value="NB", checked=(info[3] == "NB"), required)
+            label Non-binaire
+            br
+            label Taille(en cm) : 
+            input(type='number', name="size", id="size", min='1',max='300', value=info[4],required)
+            br
+            label Poids(en kg) : 
+            input(type='number', name="weight", id="weight",min='1', max='750', value=info[5],required)
+            br
+            br
+            legend Création de compte 
+            label Adresse électronique :  
+            input(type='email', name="mail", id="mail",placeholder='michael@example.com', value=info[6],required)
+            br
+            label Mot de passe : 
+            input(type="password", id="password", name="password", minlength="8", value=info[7],required)
+            br
+            br
+            input(type="submit", value="Modifier mon compte")
+
+

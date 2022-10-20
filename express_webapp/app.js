@@ -12,6 +12,7 @@ var usersRouter = require("./routes/users"); //Le fichier routes/users.js sera a
 var connectRouter = require("./routes/connect");
 var uploadRouter = require("./routes/upload");
 var activitiesRouter = require("./routes/activities");
+var updateRouter = require("./routes/user_update");
 var app = express();
 
 // view engine setup
@@ -24,17 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
-  session({
-    secret: "=dojmmR9E@Rl5wb",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      sameSite: "strict",
-    },
-  })
+    session({
+        secret: "=dojmmR9E@Rl5wb",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            sameSite: "strict",
+        },
+    })
 );
-app.use(fileUpload({
-}));
+app.use(fileUpload({}));
 
 app.use("/", indexRouter);
 //ajout
@@ -42,21 +42,22 @@ app.use("/users", usersRouter);
 app.use("/connect", connectRouter);
 app.use("/upload", uploadRouter);
 app.use("/list_activities", activitiesRouter);
+app.use("/user_update", updateRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function(req, res, next) {
+    next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+    // render the error page
+    res.status(err.status || 500);
+    res.render("error");
 });
 
 module.exports = app;

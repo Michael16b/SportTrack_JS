@@ -28,14 +28,19 @@ router.post("/", function(req, res, next) {
         user_dao.findByEmail(email, (err, row) => {
             if (err) {
                 console.log(err);
-            } else if (row != null) {
+            } else if (row != null && row.idUser != req.session.idUser) {
                 res.render("users", { title: "S'inscrire", message: "Email déjà utilisé" });
             } else {
                 var user = new User();
                 user.init(req.body.surname, req.body.name, req.body.birth, req.body.gender,
                     parseInt(req.body.size), parseInt(req.body.weight), email, password);
-                user_dao.insert(user);
-                res.render('user_add_valid');
+                user_dao.update(user, req.session.idUser, (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.render('user_update_valid');
+                    }
+                });
             }
         });
     } catch (error) {

@@ -3,7 +3,7 @@ const User = require('../sport-track-db/User');
 var router = express.Router();
 var user_dao = require('../sport-track-db/user_dao');
 
-//afficher tous les users de la bdd
+
 router.get("/", function(req, res, next) {
     res.render("users", { title: "S'inscrire" });
 });

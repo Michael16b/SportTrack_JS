@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
                     }
                     acts.push(data);
                 });
-                console.log(acts)
+                console.log(acts);
                 res.render('list_activities', { title: 'Liste des activités', acts: acts });
             });
         }

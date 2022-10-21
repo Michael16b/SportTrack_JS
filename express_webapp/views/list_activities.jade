@@ -1,6 +1,7 @@
 div
     table 
         caption Vos activités
+        if acts[0] != null
             tr
                 th Description
                 th Date
@@ -12,24 +13,24 @@ div
                 th Fréquence cardiaque maximum
 
             for data in acts
-                tr 
-                    td
-                        p= data[0]
-                    td
-                        p= data[1]
-                    td
-                        p= data[2]
-                    td
-                        p= data[3]
-                    td 
-                        p= data[4]
-                    td 
-                        p= data[5]
-                    td 
-                        p= data[6]
-                    td 
-                        p= data[7]
-            else 
-                tr
-                    td  
-                        p Vous n'avez aucune activité
+                    tr 
+                        td
+                            p= data[0]
+                        td
+                            p= data[1]
+                        td
+                            p= data[2]
+                        td
+                            p= data[3]
+                        td 
+                            p= data[4]
+                        td 
+                            p= data[5]
+                        td 
+                            p= data[6]
+                        td 
+                            p= data[7]
+        else 
+            tr
+                td  
+                    p Vous n'avez aucune activité

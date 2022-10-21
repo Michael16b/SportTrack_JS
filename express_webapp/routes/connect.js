@@ -17,7 +17,7 @@ router.post("/", function(req, res, next) {
                 req.session.idUser = row.idUser;
                 res.redirect("/");
             } else {
-                res.render("connect", { title: "Connexion", message: "Email ou mot de passe incorrect" });
+                res.render("errorAccount", { title: "Connexion", message: "Email ou mot de passe incorrect" });
             }
         });
 
